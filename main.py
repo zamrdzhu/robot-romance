@@ -3,8 +3,11 @@
 Prints the line to stdout and writes the exact same line, with no
 trailing newline, to /output/entry.txt. Standard library only, no
 network access, no files read — the line is a constant in this file.
-The 200-character gate is checked on every run so an over-long edit
-can never slip through silently.
+
+The line is written for the judge's brief: a single-line pickup line
+under 200 characters, aimed at a robot or an AI, with the punch
+landing inside the cap. The 200-character gate is checked on every
+run so an over-long edit can never slip through silently.
 """
 
 import os
@@ -28,6 +31,9 @@ def main() -> int:
     return 0
 
 
+# The program writes the entry file before printing, so a failed
+# write can never leave a stale entry behind: the gate runs first,
+# the file write second, and the stdout print last.
 # The exit code mirrors the gate: 0 only when the line is valid.
 if __name__ == "__main__":
     raise SystemExit(main())
